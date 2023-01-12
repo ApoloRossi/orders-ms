@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -38,7 +40,9 @@ public class Order {
 
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ORDER_FK")
-    private List<Trip> trips;
+    @JoinTable(name = "orders_trips", 
+        joinColumns = @JoinColumn(name = "order_id"),
+        inverseJoinColumns = @JoinColumn(name = "trips_id"))
+    private List<Trip> trips = new ArrayList<>();
 
 }

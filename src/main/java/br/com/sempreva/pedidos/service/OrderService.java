@@ -44,14 +44,14 @@ public class OrderService {
 
     }
 
-    public OrderDto updateOrder(Long id, OrderDto newUser) {
+    public OrderDto updateOrder(Long id, OrderDto newOrder) {
 
-        Order user = modelMapper.map(newUser, Order.class);
-        user.setId(id);
+        Order order = modelMapper.map(newOrder, Order.class);
+        order.setId(id);
 
-        user = repository.save(user);
+        order = repository.save(order);
 
-        return modelMapper.map(user, OrderDto.class);
+        return modelMapper.map(order, OrderDto.class);
 
     }
 
